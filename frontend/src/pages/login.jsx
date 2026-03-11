@@ -97,6 +97,12 @@ export default function Login() {
       >
         로그인
       </button>
+      <p
+        style={{ cursor: "pointer", marginTop: "20px" }}
+        onClick={() => (window.location.href = "/signup")}
+      >
+        회원가입 하기
+      </p>
     </div>
   );
 }
