@@ -13,7 +13,7 @@ def load_csv_to_table():
 # 위험 신호 요약 : risk_signal_summary
 
 def load_csv_to_table_alio():
-    df = pd.read_excel("app/data/alio_master_table.xlsx")
+    df = pd.read_csv("app/data/alio_master_table.csv")
     print("CSV 읽기 성공")
 
     df.to_sql("alio_master_table", engine, index=False, if_exists="replace")
