@@ -5,9 +5,24 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
+  const [organizationId, setOrganizationId] = useState("");
+
   const [emailError, setEmailError] = useState("");
   const [pwError, setPwError] = useState("");
   const [pwCheckError, setPwCheckError] = useState("");
+
+  // 기관 목록 예시이고, 아래대로 연결하면 됨.
+  /*useEffect(() => {
+  fetch("http://localhost:5000/organizations")
+    .then((res) => res.json())
+    .then((data) => setOrganizations(data));
+}, []);*/
+
+  const organizations = [
+    { id: 1, name: "한국관광공사" },
+    { id: 2, name: "국제데이터포털" },
+    { id: 3, name: "공공기관 데이터" },
+  ];
 
   const validateEmail = (value) => {
     const regex = /\S+@\S+\.\S+/;
@@ -51,6 +66,7 @@ export default function Signup() {
     email &&
     password &&
     passwordCheck &&
+    organizationId &&
     !emailError &&
     !pwError &&
     !pwCheckError;
@@ -65,6 +81,7 @@ export default function Signup() {
         body: JSON.stringify({
           email: email,
           password: password,
+          organizationId: organizationId,
         }),
       });
 
@@ -119,6 +136,22 @@ export default function Signup() {
         </div>
 
         {pwCheckError && <p className="error-text">{pwCheckError}</p>}
+
+        {/* 기관 선택 드롭다운 */}
+        <label className="label password-label">기관 선택</label>
+        <div className="input-box">
+          <select
+            value={organizationId}
+            onChange={(e) => setOrganizationId(e.target.value)}
+          >
+            <option value="">기관을 선택해주세요</option>
+            {organizations.map((org) => (
+              <option key={org.id} value={org.id}>
+                {org.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <button
