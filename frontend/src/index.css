@@ -1,7 +1,7 @@
 body {
   margin: 0;
   /*background: linear-gradient(135deg, #ffd6e8, #d6e7ff);*/
-  background: #000000;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
