@@ -1,0 +1,295 @@
+h3,
+.guide-header,
+.guide-title,
+strong {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* 숫자 데이터 강조 */
+.detail,
+.result-content b,
+.gauge-score {
+  font-weight: 600;
+}
+
+.forecast-page-root {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* 메인 레이아웃 */
+.forecast-page-main {
+  width: 100%;
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+}
+
+/* 왼쪽 입력 패널 */
+.leftPanel {
+  width: 280px;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef0f2;
+}
+
+.leftPanel h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+.leftPanel label {
+  margin-top: 15px; /* 기존 10px → 15px */
+  font-size: 13px;
+}
+
+.leftPanel input,
+.leftPanel select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: #f8f9fa; /* 입력창 배경색 */
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* 체크박스 컨테이너 */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* 체크박스 사이즈 조정 */
+.checkbox-row input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #3b82f6; /* 체크 시 색상 */
+}
+
+/* 체크박스 옆 글자 스타일 */
+.checkbox-row label {
+  margin-top: 0;
+  font-size: 15px;
+  color: #000000;
+  cursor: pointer;
+  user-select: none; /* 텍스트 드래그 방지 */
+}
+
+.leftPanel button {
+  margin-top: 30px;
+  padding: 15px;
+  background: linear-gradient(135deg, #dbffd0 0%, #b7ffa2 100%);
+  border-radius: 15px;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+/* 버튼 호버 효과 (마우스 올렸을 때) */
+.leftPanel button:hover {
+  background-color: #b7ffa2; /* 마우스 올렸을때 배경색 */
+  box-shadow: 0 0 10px #57b33c;
+}
+
+/* 버튼 클릭 효과 */
+.leftPanel button:active {
+  transform: scale(0.98);
+}
+
+/* 중앙 패널 */
+.centerPanel {
+  width: 100%;
+  /* max-width: 1200px; */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-width: 600px;
+}
+
+/* 게이지 영역 */
+.riskSection {
+  display: flex;
+  gap: 20px;
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef0f2;
+}
+
+.chartCard {
+  flex: 1;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  align-items: center;
+}
+
+/* 결과 영역 */
+.resultSection {
+  background: white;
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef0f2;
+  min-height: 400px;
+}
+
+.resultSection h3 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 25px;
+  border-left: 6px solid #3b82f6; /* 제목 포인트 */
+  padding-left: 15px;
+}
+
+/* 오른쪽 가이드 */
+.rightPanel {
+  width: 320px;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef0f2;
+}
+
+.guide-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+/* .guide-item {
+  margin-bottom: 25px;
+}
+
+.guide-title {
+  margin-bottom: 3px;
+  font-size: 20px;
+  color: #333;
+}
+
+.guide-formula {
+  font-size: 15px;
+  font-weight: bold;
+  color: #535353;
+  margin-bottom: 15px;
+} */
+
+.grade-box {
+  background: #fbfbfb;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+}
+
+.grade-box:hover {
+  transform: translateX(5px);
+}
+
+/* .grade-box strong {
+  font-size: 15px;
+  margin-bottom: 2px;
+  font-weight: 800;
+}
+
+.grade-box span {
+  font-size: 15px;
+  opacity: 0.9;
+} */
+
+/* 등급별 색상상태 */
+/* .high {
+  border-left: 4px solid #ff4d4f;
+  color: #cf1322;
+}
+
+.warning {
+  border-left: 4px solid #dba400;
+  color: #856404;
+}
+
+.stable {
+  font-size: 13px;
+  border-left: 4px solid #38a700;
+  color: #278300;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #000000;
+  margin: 20px 0;
+}
+
+.insight-card {
+  background: #fff5f5;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 17px;
+  line-height: 1.5;
+  border: 1px dashed #000000;
+} */
+
+/* 로딩 UI */
+.loadingBox {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progressBar {
+  width: 100%;
+  height: 20px;
+  background: #eeeeee;
+  border-radius: 10px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  width: 0%;
+  background: #2c7be5;
+  transition: width 0.3s ease;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .leftPanel {
+    width: 100%;
+  }
+
+  .rightPanel {
+    width: 100%;
+  }
+
+  .riskSection {
+    flex-direction: column;
+  }
+}

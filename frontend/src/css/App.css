@@ -1,0 +1,94 @@
+/* =========================================
+   폰트 전역 설정
+   ========================================= */
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 600; /* SemiBold */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 700; /* Bold */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 900; /* Black (가장 두꺼움) */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
+    format("woff2");
+}
+
+/* =========================================
+   전역 초기화
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none; /* 모든 목록의 점(bullet) 제거 */
+}
+
+a {
+  color: inherit;
+  text-decoration: none; /* 모든 링크 밑줄 제거 */
+}
+
+/* =========================================
+   3. 최상위 레이아웃 설정
+   ========================================= */
+body {
+  /* 폰트 1순위: 프레젠테이션, 만약 실패시 시스템 기본 폰트 사용 */
+  font-family:
+    "Freesentation",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans KR",
+    sans-serif;
+  background-color: #f0f2f5; /* 기본 배경색 */
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5; /* 글자 위아래 기본 여백 */
+  overflow-x: hidden; /* 모바일 가로로 스크롤 방지 */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 화면 전체 높이 사용 */
+  width: 100%;
+}
+
+/* =========================================
+   모든 페이지 적용
+   ========================================= */
+/* 반응형 이미지 기본 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 강조할 숫자나 제목 공통 */
+.font-bold {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}

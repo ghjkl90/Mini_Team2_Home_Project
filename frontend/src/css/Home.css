@@ -1,0 +1,112 @@
+.home-container {
+  min-height: 100vh;
+  flex: 1;
+  width: 100%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  position: relative;
+}
+
+.home-spider-left {
+  position: fixed;
+  left: -50vw;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0; /* 가장 뒤 */
+}
+
+.home-spider-left img {
+  width: 80vw;
+  max-width: 1200px;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+.home-spider-right {
+  position: fixed;
+  right: -50vw;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-spider-right img {
+  width: 80vw;
+  max-width: 1200px;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+
+  transform: scaleX(-1); /* 좌우 반전 */
+}
+
+.home-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+
+  opacity: 0.4;
+
+  z-index: 1; /* spider 위 */
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+
+  padding-left: 10vw;
+}
+
+.home-title {
+  font-style: italic;
+  font-size: clamp(50px, 6vw, 80px);
+
+  font-weight: 700;
+  line-height: 1.1;
+  color: #6da732;
+}
+
+.home-login-button {
+  margin-top: 40px;
+
+  height: 48px;
+  width: 160px;
+
+  border-radius: 14px;
+  border: none;
+
+  background: #6da732;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+.home-login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.home-footer {
+  position: absolute;
+  bottom: 40px;
+  left: 10vw;
+
+  font-size: 14px;
+  opacity: 0.7;
+  z-index: 2;
+}
