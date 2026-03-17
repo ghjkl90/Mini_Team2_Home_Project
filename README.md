@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# HR Risk Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+공공기관 데이터를 기반으로 직원의 **퇴사 위험도와 번아웃 위험을 분석하는 웹 대시보드 프로젝트**입니다.  
+기관 데이터를 조회하고 직원 정보를 입력하면 머신러닝 기반 예측 모델을 통해 위험도를 분석합니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Project Overview
 
-### `npm start`
+이 프로젝트는 공공기관 데이터를 활용하여 다음과 같은 기능을 제공합니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 기관 정보 및 주요 지표 조회
+- 직원 퇴사 위험도 예측
+- 번아웃 위험 분석
+- 기관 평균 대비 위험 요인 분석
+- HR 의사결정을 위한 데이터 기반 대시보드 제공
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠 Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+- React
+- Axios
+- React Router
 
-### `npm run build`
+### Backend
+- FastAPI (Python)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Database
+- MariaDB
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Data & ML
+- Pandas
+- Scikit-learn
+- Joblib
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📂 Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Features
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1️⃣ 기관 대시보드 조회
+기관명을 기준으로 다음 정보를 조회합니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 기관 정보
+- 평균 임금 비교
+- 채용 경쟁력
+- 유연근무 비율
+- 조직 건강도
+- 위험 신호 요약
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 2️⃣ 직원 위험 분석
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+직원 정보를 입력하면 다음을 분석합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+입력값
 
-### Code Splitting
+- 기관명
+- 나이
+- 성별
+- 근속연수
+- 성과등급
+- 업무부하 수준
+- 유연근무 여부
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+분석 결과
 
-### Analyzing the Bundle Size
+- 퇴사 위험 확률
+- 번아웃 위험 수준
+- 예상 총 근속기간
+- 위험 요인 설명
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
