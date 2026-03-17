@@ -1,0 +1,16 @@
+/* =========================================
+   [5번 카드] 위험 신호 요약
+   ========================================= */
+.middle-score {
+  margin-bottom: 10px;
+  font-size: 30px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.small-detail {
+  margin-top: 10px;
+  font-size: 22px;
+  color: #000000;
+  font-weight: bold;
+}

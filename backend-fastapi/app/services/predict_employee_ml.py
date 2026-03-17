@@ -38,6 +38,18 @@ DEFAULT_RISK_THRESHOLD = 0.40
 class HRPredictor:
     """
     프론트/백엔드 분리 구조에서 재사용 가능한 직원 예측기 클래스.
+
+    입력 예시
+    ----------
+    predictor.predict(
+        institution="한국전력공사",
+        age=34,
+        gender="M",
+        tenure_years=5,
+        performance_grade="A",
+        workload_level="high",
+        flexible_work="Y"
+    )
     """
 
     FEATURE_ORDER = [
@@ -113,6 +125,29 @@ class HRPredictor:
         workload_level: str,
         flexible_work: str,
     ) -> Dict[str, Any]:
+        """
+        단일 직원 예측
+
+        Returns
+        -------
+        {
+            "institution": ...,
+            "input_features": {...},
+            "quit_risk_probability": ...,
+            "quit_prediction": 0 or 1,
+            "quit_risk_level": "low" | "medium" | "high",
+            "burnout_risk_probability": ...,
+            "burnout_risk_level": "low" | "medium" | "high",
+            "expected_total_tenure": ...,
+            "expected_remaining_tenure": ...,
+            "risk_factors": [...],
+            "vs_institution_avg": {
+                "quit_risk_diff": ...,
+                "remaining_tenure_diff": ...,
+                "expected_total_tenure_diff": ...
+            }
+        }
+        """
         raw_features = self.build_features(
             institution=institution,
             age=age,
@@ -167,25 +202,17 @@ class HRPredictor:
             workload_level=str(raw_features["workload_level"]),
             flexible_work=str(raw_features["flexible_work"]),
         )
-
-        # JSON 직렬화 안전용 input_features
-        safe_input_features = {
-            "institution": str(raw_features["institution"]),
-            "region": str(raw_features["region"]),
-            "institution_size": float(raw_features["institution_size"]),
-            "avg_salary": float(raw_features["avg_salary"]),
-            "regional_salary": float(raw_features["regional_salary"]),
-            "age": float(raw_features["age"]),
-            "gender": str(raw_features["gender"]),
-            "tenure_years": float(raw_features["tenure_years"]),
-            "performance_grade": str(raw_features["performance_grade"]),
-            "workload_level": str(raw_features["workload_level"]),
-            "flexible_work": str(raw_features["flexible_work"]),
-        }
-
+        recommendation_summary = self._build_recommendation_summary(
+            quit_probability=quit_probability,
+            burnout_probability=burnout_probability,
+            flexible_work=str(raw_features["flexible_work"]),
+            workload_level=str(raw_features["workload_level"]),
+            risk_factors=risk_factors,
+)        
+        
         result = {
-            "institution": str(raw_features["institution"]),
-            "input_features": safe_input_features,
+            "institution": raw_features["institution"],
+            "input_features": raw_features,
             "quit_risk_probability": round(quit_probability, 4),
             "quit_prediction": quit_prediction,
             "quit_risk_level": self._to_risk_level(quit_probability),
@@ -194,15 +221,13 @@ class HRPredictor:
             "expected_total_tenure": round(expected_total_tenure, 2),
             "expected_remaining_tenure": round(remaining_tenure, 2),
             "risk_factors": risk_factors,
-            "vs_institution_avg": {
-                "quit_risk_diff": round(quit_risk_diff, 4),
-                "expected_total_tenure_diff": round(expected_total_tenure_diff, 2),
-                "remaining_tenure_diff": round(remaining_tenure_diff, 2),
-                "institution_avg_quit_risk": round(inst_avg_quit, 4),
-                "institution_avg_expected_total_tenure": round(inst_avg_expected_total, 2),
-                "institution_avg_expected_remaining_tenure": round(inst_avg_remaining, 2),
-            },
+            "recommendation_summary": recommendation_summary,
+            "quit_risk_diff": round(quit_risk_diff, 4),
+            "expected_total_tenure_diff": round(expected_total_tenure_diff, 2),
+            "remaining_tenure_diff": round(remaining_tenure_diff, 2),
+            "institution_avg_quit_risk": round(inst_avg_quit, 4),
         }
+        
         return result
 
     def predict_from_dict(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -247,22 +272,18 @@ class HRPredictor:
             "institution": institution,
             "region": region,
             "institution_size": self._safe_float(
-                base.get("institution_size"),
-                self.global_numeric_defaults["institution_size"],
+                base.get("institution_size"), self.global_numeric_defaults["institution_size"]
             ),
             "avg_salary": self._safe_float(
-                base.get("avg_salary"),
-                self.global_numeric_defaults["avg_salary"],
+                base.get("avg_salary"), self.global_numeric_defaults["avg_salary"]
             ),
             "regional_salary": self._safe_float(
-                regional_salary,
-                self.global_numeric_defaults["regional_salary"],
+                regional_salary, self.global_numeric_defaults["regional_salary"]
             ),
             "age": self._safe_float(age, self.global_numeric_defaults["age"]),
             "gender": self._normalize_category("gender", gender),
             "tenure_years": self._safe_float(
-                tenure_years,
-                self.global_numeric_defaults["tenure_years"],
+                tenure_years, self.global_numeric_defaults["tenure_years"]
             ),
             "performance_grade": self._normalize_category("performance_grade", performance_grade),
             "workload_level": self._normalize_category("workload_level", workload_level),
@@ -315,6 +336,7 @@ class HRPredictor:
             emp["expected_total_tenure"] - emp["tenure_years"]
         ).clip(lower=0)
 
+        # 기관 기본 feature lookup
         inst_agg = (
             emp.groupby("institution", as_index=False)
             .agg(
@@ -335,6 +357,7 @@ class HRPredictor:
             for _, row in inst_agg.iterrows()
         }
 
+        # 기관 평균 통계 lookup
         inst_stats = (
             emp.groupby("institution", as_index=False)
             .agg(
@@ -353,6 +376,7 @@ class HRPredictor:
             for _, row in inst_stats.iterrows()
         }
 
+        # master 테이블이 있으면 보조적으로 merge
         if self.master_table is not None:
             master = self.master_table.copy()
             rename_map = {
@@ -380,18 +404,12 @@ class HRPredictor:
         region_salary = emp.groupby("region")["regional_salary"].median().to_dict()
         self.region_salary_lookup = {str(k): float(v) for k, v in region_salary.items()}
 
-        age_series = pd.to_numeric(emp["age"], errors="coerce") if "age" in emp.columns else pd.Series(dtype=float)
-        tenure_series = pd.to_numeric(emp["tenure_years"], errors="coerce")
-
-        age_median = age_series.median() if not age_series.empty else 35.0
-        tenure_median = tenure_series.median() if not tenure_series.empty else 5.0
-
         self.global_numeric_defaults = {
             "institution_size": float(pd.to_numeric(emp["institution_size"], errors="coerce").median()),
             "avg_salary": float(pd.to_numeric(emp["avg_salary"], errors="coerce").median()),
             "regional_salary": float(pd.to_numeric(emp["regional_salary"], errors="coerce").median()),
-            "age": float(age_median if pd.notna(age_median) else 35.0),
-            "tenure_years": float(tenure_median if pd.notna(tenure_median) else 5.0),
+            "age": float(pd.to_numeric(emp.get("age"), errors="coerce").median()),
+            "tenure_years": float(pd.to_numeric(emp.get("tenure_years"), errors="coerce").median()),
         }
 
     # =========================
@@ -453,9 +471,7 @@ class HRPredictor:
     def _validate_category(self, col: str, value: str) -> str:
         allowed = set(map(str, self.encoders[col].classes_))
         if value not in allowed:
-            raise ValueError(
-                f"{col} 값 {value!r} 이 허용 범위를 벗어났습니다. 허용값: {sorted(allowed)}"
-            )
+            raise ValueError(f"{col} 값 {value!r} 이 허용 범위를 벗어났습니다. 허용값: {sorted(allowed)}")
         return value
 
     # =========================
@@ -470,8 +486,14 @@ class HRPredictor:
         flexible_work: str,
         institution: str,
     ) -> float:
+        """
+        번아웃 위험도는 1차 MVP에서 rule-based로 계산한다.
+        최종 범위: 0.0 ~ 1.0
+        """
+
         score = 0.0
 
+        # 1) 업무강도
         workload_map = {
             "low": 0.10,
             "medium": 0.30,
@@ -479,11 +501,14 @@ class HRPredictor:
         }
         score += workload_map.get(workload_level, 0.30)
 
+        # 2) 유연근무 사용 여부
         if flexible_work == "N":
             score += 0.15
         else:
             score -= 0.05
 
+        # 3) 성과 압박
+        # A등급이 항상 나쁘다는 뜻은 아니지만, MVP에서는 성과 압박 가능성으로 약하게 반영
         perf_map = {
             "A": 0.10,
             "B": 0.06,
@@ -492,6 +517,7 @@ class HRPredictor:
         }
         score += perf_map.get(performance_grade, 0.05)
 
+        # 4) 근속 피로감
         if tenure_years >= 15:
             score += 0.12
         elif tenure_years >= 8:
@@ -499,11 +525,13 @@ class HRPredictor:
         elif tenure_years >= 3:
             score += 0.04
 
+        # 5) 연령 보정
         if age < 25:
             score += 0.03
         elif age >= 50:
             score += 0.03
 
+        # 6) 기관 환경 보정
         inst_avg_quit = self.institution_stat_lookup.get(institution, {}).get("avg_quit_probability", 0.0)
         if inst_avg_quit >= 0.55:
             score += 0.10
@@ -564,6 +592,7 @@ class HRPredictor:
         if age < 25:
             factors.append("저연령 초기 커리어 구간임")
 
+        # 중복 제거 + 최대 5개 제한
         deduped: List[str] = []
         for item in factors:
             if item not in deduped:
@@ -574,12 +603,69 @@ class HRPredictor:
 
         return deduped[:5]
 
+    def _build_recommendation_summary(
+        self,
+        quit_probability: float,
+        burnout_probability: float,
+        flexible_work: str,
+        workload_level: str,
+        risk_factors: list[str],
+    ) -> str:
+        messages = []
+
+        if quit_probability >= 0.70:
+            messages.append(
+                "퇴사위험이 높은 수준으로 나타나 면담을 통해 이탈 원인을 우선적으로 점검할 필요가 있습니다.\n"
+                "조직 적응 상태와 업무 만족도를 확인하고 필요한 지원 방안을 검토하는 것이 바람직합니다."
+            )
+        elif quit_probability >= 0.40:
+            messages.append(
+                "퇴사위험 관리 대상으로 정기적인 상태 모니터링이 필요합니다.\n"
+                "업무 만족도와 조직 적응 상태를 점검하는 면담을 통해 이탈 가능성을 사전에 관리하는 것이 좋습니다."
+            )
+
+        if burnout_probability >= 0.70:
+            messages.append(
+                "번아웃 위험이 높은 상태로 업무 부담 수준에 대한 즉각적인 점검이 필요합니다.\n"
+                "업무 분산, 역할 조정, 충분한 휴식 보장 등을 통해 근무 환경을 개선하는 것이 중요합니다."
+            )
+        elif burnout_probability >= 0.40:
+            messages.append(
+                "번아웃 가능성이 감지되므로 업무 부담과 근무 환경에 대한 점검이 필요합니다.\n"
+                "업무 분산이나 역할 재조정을 통해 장기적인 업무 지속성을 확보하는 것이 바람직합니다."
+            )
+
+        if flexible_work == "N":
+            messages.append(
+                "현재 유연근무 제도를 활용하지 않고 있어 근무 방식의 유연성을 검토할 필요가 있습니다.\n"
+                "유연근무 활용 여부를 검토하면 업무 만족도와 조직 안정성 향상에 도움이 될 수 있습니다."
+            )
+
+        if workload_level == "high":
+            messages.append(
+                "현재 업무 강도가 높은 수준으로 나타나 단기적인 부담 완화 방안을 검토할 필요가 있습니다.\n"
+                "업무 우선순위 조정이나 인력 분산 등을 통해 업무 집중도를 관리하는 것이 좋습니다."
+            )
+
+        if not messages:
+            messages.append(
+            "현재 입력 기준에서는 뚜렷한 고위험 신호가 확인되지 않았습니다.\n"
+            "정기적인 상태 점검과 커뮤니케이션을 유지하며 안정적인 근무 환경을 관리하는 것이 바람직합니다."
+    )
+
+        deduped = []
+        for msg in messages:
+            if msg not in deduped:
+                deduped.append(msg)
+
+        return " ".join(deduped[:4])
+
     def _to_risk_level(self, probability: float) -> str:
         if probability < 0.40:
-            return "low"
+            return "C"
         if probability < 0.70:
-            return "medium"
-        return "high"
+            return "B"
+        return "A"
 
     @staticmethod
     def _safe_float(value: Any, default: float) -> float:
@@ -595,6 +681,9 @@ class HRPredictor:
         return max(min_value, min(float(value), max_value))
 
 
+# =========================
+# module-level helpers
+# =========================
 _DEFAULT_PREDICTOR: Optional[HRPredictor] = None
 
 

@@ -16,7 +16,7 @@ function GallerySlider() {
 
       loop: true,
 
-      speed: 6000,
+      speed: 5000,
 
       autoplay: {
         delay: 0,

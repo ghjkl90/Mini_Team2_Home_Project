@@ -9,7 +9,6 @@
   list-style: none;
 }
 
-/*----- Variables -----*/
 :root {
   --Berkshire: "Berkshire Swash", cursive;
 
@@ -24,21 +23,22 @@
     rgb(255, 255, 255) 100%
   );
 }
-/*----- General -----*/
+
 body {
   width: 100%;
   height: 100vh;
-
-  /* ⭐ 기본 폰트 */
-  font-family: "Pretendard", sans-serif;
-
   background: var(--bg-color);
   overflow: hidden;
+  font-family: "Pretendard", sans-serif;
 }
 
-/* ⭐ 갤러리 영역에만 적용 */
+/* ⭐ 갤러리 영역 적용 */
 .gallery-wrapper {
   font-family: var(--Berkshire);
+  position: relative; /* absolute 제거 */
+  margin-top: -30px; /* 홈과 자연스럽게 이어지게 */
+  width: 100%;
+  z-index: 2;
 }
 
 a {
@@ -47,6 +47,21 @@ a {
 
 a:hover {
   color: var(--secondary);
+}
+
+.home-logo {
+  position: fixed;
+  top: 1vw;
+  left: 1vw; /* 왼쪽 위치 살짝 조정 */
+  width: 10vw; /* 로고 크기 축소 */
+  height: auto;
+  z-index: 10;
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+  margin-left: 8%;
 }
 
 /*----- BG Text -----*/
@@ -71,48 +86,30 @@ a:hover {
 .swiper-container {
   width: 100%;
   position: absolute;
-  top: 50%;
+  top: 38%; /* 갤러리 위치 위로 */
   transform: translateY(-50%);
   padding: 50px 0;
 }
 
-/* ⭐ 끊김 없는 흐름 핵심 */
 .swiper-wrapper {
+  display: flex;
   transition-timing-function: linear !important;
 }
 
-/*--- slider ---*/
 .swiper-slide {
+  flex-shrink: 0;
   width: 40vw;
   height: 28vw;
   max-width: 800px;
   max-height: 500px;
 }
 
-.img1 {
-  background-image: url("../../public/images/image1.png");
-}
-
-.img2 {
-  background-image: url("../../public/images/image2.png");
-}
-
-.img3 {
-  background-image: url("../../public/images/image3.png");
-}
-
-.img4 {
-  background-image: url("../../public/images/image4.png");
-}
-
-/* Image style */
 .slide-img {
   position: relative;
   width: 100%;
   height: 100%;
   background-position: center;
   background-size: cover;
-
   filter: blur(3px);
   transition: filter 0.6s ease;
 }
@@ -121,7 +118,6 @@ a:hover {
   filter: blur(0);
 }
 
-/* overlay */
 .slide-img::after {
   content: "";
   position: absolute;
@@ -129,14 +125,14 @@ a:hover {
   background: var(--linear-gradient);
   mix-blend-mode: multiply;
   transition: all 1s ease;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .slide-img:hover::after {
   opacity: 0.3;
 }
 
-/* slide number */
+/* Slide number */
 .slide-number {
   position: absolute;
   top: -45px;
@@ -154,7 +150,7 @@ a:hover {
   position: relative;
 }
 
-/* slide title */
+/* Slide title */
 .slide-title {
   position: absolute;
   bottom: -70px;

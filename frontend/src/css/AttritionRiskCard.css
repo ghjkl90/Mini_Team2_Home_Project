@@ -1,0 +1,50 @@
+/* =========================================
+   [6번 카드] 기관 평균 퇴사 위험도
+   ========================================= */
+.middle-score2 {
+  margin-bottom: 15px;
+  font-size: 30px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.small-detail2 {
+  margin-top: 15px;
+}
+
+/* 분기 레이아웃 컨테이너 */
+.attrition-layout {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  gap: 40px; /* 왼쪽 세트와 오른쪽 세트 사이 간격 */
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* 각 세로 기둥(컬럼) 설정 */
+.attrition-col {
+  display: flex;
+  flex-direction: column; /* 위아래 배치 */
+  gap: 12px; /* 1분기와 2분기 사이 간격 */
+  text-align: left;
+}
+
+/* 개별 줄 스타일 */
+.small-detail2 {
+  font-size: 30px;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.q-label {
+  color: #000000;
+  font-weight: 500;
+}
+
+.q-value {
+  color: #ff362f; /* 숫자 강조색 */
+  font-weight: bold;
+  font-size: 30px;
+}

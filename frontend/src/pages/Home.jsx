@@ -1,4 +1,4 @@
-import "./Home.css";
+import "../css/Home.css";
 import { useNavigate } from "react-router-dom";
 import GallerySlider from "../components/GallerySlider";
 

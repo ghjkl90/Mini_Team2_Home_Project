@@ -1,0 +1,15 @@
+/* =========================================
+   [4번 카드] 조직 건강도 진단
+   ========================================= */
+.big-score {
+  font-size: 50px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.bottom-text {
+  margin-top: 25px;
+  font-size: 35px;
+  color: #000000;
+  font-weight: bold;
+}

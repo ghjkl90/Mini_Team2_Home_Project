@@ -1,0 +1,52 @@
+/* =========================================
+   [1번 카드] 평균 임금 비교
+   ========================================= */
+
+/* 카드 내부 배경색 (기존 노란색 유지 혹은 변경) */
+.salary-card {
+  background-color: #fff0be;
+  justify-content: flex-start; /* 위에서부터 정렬 */
+  padding-top: 25px;
+}
+
+.salary-title {
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #333;
+}
+
+.salary-chart-wrapper {
+  width: 100%;
+  height: 190px; /* 차트 영역 높이*/
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.salary-unit-text {
+  font-size: 11px;
+  text-align: left;
+  color: #666;
+  margin-bottom: 2px;
+  width: 100%;
+  padding-left: 5px;
+}
+
+/* 하단 텍스트 영역 */
+.salary-info-text {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.salary-info-text p {
+  font-size: 18px;
+  color: #555;
+}
+
+.salary-info-text .highlight {
+  font-weight: bold;
+  color: #d9534f;
+  font-size: 19px;
+}
