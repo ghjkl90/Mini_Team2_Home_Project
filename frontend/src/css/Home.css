@@ -1,21 +1,3 @@
-/*.home-container {
-  height: 100vh;
-  width: 100%;
-  background: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  position: relative;
-}
-.home-spider-left {
-  position: fixed;
-  left: -50vw;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 0;
-}*/
 .home-container {
   height: 100vh;
   width: 100%;
