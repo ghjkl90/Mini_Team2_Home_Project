@@ -26,6 +26,8 @@ services:
       - ./.env
     environment:
       DATABASE_URL: mysql+pymysql://${DB_USER}:${DB_PASSWORD}@team_2_db:${DB_PORT}/${DB_NAME}
+      DB_HOST: team_2_db
+      DB_PORT: 3306
     volumes:
       - ./backend:/app
     ports:
