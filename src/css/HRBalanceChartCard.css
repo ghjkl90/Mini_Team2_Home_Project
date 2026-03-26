@@ -1,0 +1,121 @@
+/* 
+  HRBalanceChartCard.css - Refined Dark Neon Version (Overlap Fixed & Hover Added)
+  - 차트와 텍스트 간의 겹침 현상 해결을 위한 레이아웃 최적화
+  - 다른 카드들과의 통일성을 위한 호버 애니메이션 추가
+*/
+
+.recharts-polar-angle-axis-tick-value {
+  font-family: "Space Grotesk", "Inter", sans-serif !important;
+  font-weight: 700;
+  fill: #a1a1aa;
+  font-size: 11px;
+}
+
+.recharts-polar-grid-concentric-path,
+.recharts-polar-grid-angle-line {
+  stroke: rgba(255, 255, 255, 0.015) !important;
+}
+
+.balance-card {
+  background-color: rgba(18, 18, 18, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 32px !important;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 10;
+  overflow: visible !important;
+}
+
+.balance-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(74, 222, 128, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-header-custom {
+  padding: 30px 30px 10px 32px;
+  text-align: left;
+}
+
+.eng-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff !important;
+  margin-bottom: 4px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.kor-sub {
+  font-size: 20px;
+  font-weight: 500 !important;
+  color: #4ade80b3 !important;
+  margin: 6px 6px;
+}
+
+.card-content-title {
+  font-size: 20px;
+  font-weight: 500 !important;
+  color: #e2e2e2 !important;
+}
+
+.card-content {
+  font-size: 20px;
+  font-weight: 500 !important;
+  color: #b6b6b6 !important;
+}
+
+.balance-content {
+  height: 530px !important;
+  padding: 10px 20px 50px 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+.balance-info-text {
+  position: absolute;
+  bottom: 30px;
+  font-size: 20px;
+  color: #a1a1aa !important;
+  font-weight: 600;
+  font-family: "Space Grotesk", sans-serif;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 24px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.balance-info-sc {
+  font-size: 25px;
+  font-weight: 900;
+  color: #4ade80 !important;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+}
+
+.recharts-radar-polygon {
+  fill: rgba(74, 222, 128, 0.25) !important;
+  stroke: #4ade80 !important;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 5px rgba(74, 222, 128, 0.4));
+}
+
+.logic-tooltip-bubble {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  backdrop-filter: blur(8px);
+}
