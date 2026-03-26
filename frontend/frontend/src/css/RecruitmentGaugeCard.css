@@ -1,0 +1,161 @@
+.recruitment-group-container,
+.recruitment-group-container * {
+  font-family: "Space Grotesk", "Inter", sans-serif !important;
+}
+
+.recruitment-group-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* 메인 카드 */
+.recruitment-main-card {
+  background-color: rgba(18, 18, 18, 0.8) !important;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  overflow: visible !important;
+  height: 485px;
+}
+
+.recruitment-main-card:hover {
+  border-color: rgba(74, 222, 128, 0.2);
+  transform: translateY(-4px);
+}
+
+.gauge-result-info-card:hover {
+  border-color: rgba(74, 222, 128, 0.2);
+  transform: translateY(-4px);
+}
+
+.recruitment-gauge-content {
+  background-color: transparent !important;
+  height: auto !important;
+  padding: 32px 32px 100px 32px !important; /* 하단 패딩을 소폭 늘려 공간 확보 */
+  display: block;
+}
+
+/* 좌표 기준점 박스 */
+.gauge-relative-box {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 80px; /* 👈 여기에 공간 확보 */
+}
+
+/* 게이지 내부 A, B, C */
+.gauge-step-label {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.label-c {
+  left: 5%;
+  bottom: 50%;
+  color: #ff5f5f;
+  text-shadow: 0 0 10px rgba(255, 95, 95, 0.3);
+}
+
+.label-b {
+  left: 50%;
+  top: -3%;
+  transform: translateX(-50%);
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+}
+
+.label-a {
+  right: 5%;
+  bottom: 50%;
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+/* 점수 오버레이 - 숫자가 게이지에 닿지 않도록 bottom 값을 하향 조정 */
+.gauge-score-overlay {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  flex-direction: column;
+}
+
+.kor-subtitle {
+  font-size: 14px;
+  color: #a1a1aa;
+}
+
+.score-num {
+  font-size: 42px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.05em;
+}
+
+.score-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  justify-content: center;
+}
+
+.score-unit {
+  font-size: 25px;
+  color: #c0c0c0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.grade-badge-custom {
+  margin-top: 8px;
+  padding: 4px 16px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 16px;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+  display: inline-block;
+}
+
+/* 안내 카드 스타일 */
+.gauge-result-info-card {
+  padding: 24px;
+  background-color: rgba(18, 18, 18, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.gauge-result-info-card:hover {
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.gauge-result-text {
+  font-family: "Inter", sans-serif;
+  font-size: 23px;
+  color: #a1a1aa;
+  margin: 0 !important;
+  line-height: 1.6;
+}
+
+.gauge-result-highlight {
+  font-weight: 800;
+  font-size: 22px;
+  color: #ffffff;
+  border-bottom: 2px solid #4ade80;
+  padding-bottom: 2px;
+}

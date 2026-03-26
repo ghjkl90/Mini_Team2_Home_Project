@@ -1,0 +1,81 @@
+# HR Risk Dashboard
+
+공공기관 데이터를 기반으로 직원의 **퇴사 위험도와 번아웃 위험을 분석하는 웹 대시보드 프로젝트**입니다.  
+기관 데이터를 조회하고 직원 정보를 입력하면 머신러닝 기반 예측 모델을 통해 위험도를 분석합니다.
+
+---
+
+## 📌 Project Overview
+
+이 프로젝트는 공공기관 데이터를 활용하여 다음과 같은 기능을 제공합니다.
+
+- 기관 정보 및 주요 지표 조회
+- 직원 퇴사 위험도 예측
+- 번아웃 위험 분석
+- 기관 평균 대비 위험 요인 분석
+- HR 의사결정을 위한 데이터 기반 대시보드 제공
+
+
+## 🛠 Tech Stack
+
+<img width="1376" height="768" alt="architecture-diagram" src="https://github.com/user-attachments/assets/1d4db16e-3a67-4d38-a229-2d03a02d1b07" />
+
+### Frontend
+- React
+- Axios
+- React Router
+- REST
+- Fatch API
+
+### Backend
+- FastAPI (Python)
+
+### Database
+- MariaDB
+
+### Data & ML
+- Pandas
+- Scikit-learn
+- Joblib
+
+---
+
+## 📂 Project Structure
+
+## 🚀 Features
+
+### 1️⃣ 기관 대시보드 조회
+기관명을 기준으로 다음 정보를 조회합니다.
+
+- 기관 정보
+- 평균 임금 비교
+- 채용 경쟁력
+- 유연근무 비율
+- 조직 건강도
+- 위험 신호 요약
+
+---
+
+### 2️⃣ 직원 위험 분석
+
+직원 정보를 입력하면 다음을 분석합니다.
+
+입력값
+
+- 기관명
+- 나이
+- 성별
+- 근속연수
+- 성과등급
+- 업무부하 수준
+- 유연근무 여부
+
+분석 결과
+
+- 퇴사 위험 확률
+- 번아웃 위험 수준
+- 예상 총 근속기간
+- 위험 요인 설명
+
+---
+
