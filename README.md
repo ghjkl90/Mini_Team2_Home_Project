@@ -1,3 +1,5 @@
+https://mini-team2-home-project.vercel.app/
+
 # HR Risk Dashboard
 
 공공기관 데이터를 기반으로 직원의 **퇴사 위험도와 번아웃 위험을 분석하는 웹 대시보드 프로젝트**입니다.  
