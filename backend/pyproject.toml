@@ -1,0 +1,23 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bcrypt>=5.0.0",
+    "cryptography>=46.0.6",
+    "fastapi==0.135.1",
+    "firebase-admin>=7.3.0",
+    "google-genai>=1.69.0",
+    "joblib>=1.5.3",
+    "numpy==2.4.3",
+    "pandas==3.0.1",
+    "pandasql==0.7.3",
+    "pydantic[email]>=2.12.5",
+    "pymysql==1.1.2",
+    "python-dotenv==1.2.2",
+    "scikit-learn>=1.8.0",
+    "sqlalchemy==2.0.48",
+    "uvicorn==0.41.0",
+]

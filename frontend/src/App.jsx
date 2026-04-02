@@ -1,0 +1,22 @@
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./css/App.css";
+import Home from "./pages/Home.jsx";
+import Mains from "./pages/Mains";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+
+function App() {
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/mains/*" element={<Mains />}></Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<Navigate to="/" replace />}></Route>
+      </Routes>
+    </HashRouter>
+  );
+}
+
+export default App;

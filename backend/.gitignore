@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+node_modules/
+.ruff_cache
+*.egg-info
+serviceAccountKey.json
+dataset.db

@@ -1,0 +1,117 @@
+:root {
+  /* 공통 포인트 컬러 */
+  --neon-green: #4ade80;
+
+  /* 다크 모드용 (Home, Login 공통) */
+  --bg-black: #050505;
+  --card-dark: #121212;
+  --input-bg: #1a1a1a;
+  --text-gray: #a1a1aa;
+  --text-white: #ffffff;
+
+  /* 라이트 모드용 (대시보드 공통) */
+  --bg-light: #ffffff;
+  --text-dark: #000000;
+  --border-green: #b6db76;
+}
+
+/* 전역 초기화 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================
+   폰트 전역 설정
+   ========================================= */
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 600; /* SemiBold */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 700; /* Bold */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "Freesentation";
+  font-weight: 900; /* Black (가장 두꺼움) */
+  font-style: normal;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
+    format("woff2");
+}
+
+/* =========================================
+   기본 태그 초기화
+   ========================================= */
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================
+   3. 최상위 레이아웃 설정
+   ========================================= */
+
+html {
+  height: auto !important;
+  overflow-y: visible !important;
+}
+
+body {
+  font-family:
+    "Freesentation",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans KR",
+    sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 강조할 숫자나 제목 공통 */
+.font-bold {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
