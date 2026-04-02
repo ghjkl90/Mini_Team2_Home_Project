@@ -64,7 +64,7 @@ class MySQLAuthService:
         return result
 
 
-cred = firebase_admin.credentials.Certificate("serviceAccountKey.json")
+cred = firebase_admin.credentials.Certificate("mini-team2-home-project-firebase-adminsdk-fbsvc-a78e9676de.json")
 firebase_admin.initialize_app(cred)
 db = firebase_admin.firestore.client()
 

@@ -6,5 +6,5 @@ __pycache__/
 node_modules/
 .ruff_cache
 *.egg-info
-serviceAccountKey.json
+mini-team2-home-project-firebase-adminsdk-fbsvc-a78e9676de.json
 dataset.db

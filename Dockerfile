@@ -21,12 +21,12 @@ COPY backend/data ./data
 COPY backend/scripts ./scripts
 COPY backend/src ./src
 COPY backend/main.py ./main.py
-COPY backend/serviceAccountKey.json ./serviceAccountKey.json
+COPY backend/mini-team2-home-project-firebase-adminsdk-fbsvc-a78e9676de.json ./mini-team2-home-project-firebase-adminsdk-fbsvc-a78e9676de.json
 
 COPY --from=frontend-builder /app/frontend/dist ./static
 
 RUN uv pip install -e .
 RUN uv run scripts/init_data.py
 
-ENV FIREBASE_API_KEY AIzaSyCFgu7JQabI46Zee4uw8WjW5R1_J9x-ifM
+ENV FIREBASE_API_KEY AIzaSyB9ojRbdcGHRt5XwcKIaE83GUXPVNkXsOQ
 CMD ["uv", "run", "main.py"]
